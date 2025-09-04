@@ -2,6 +2,7 @@ min_heapTree = []
 element_counter = 0
 
 def add(text: str) -> None:
+    # set element counter global so we can use it
     global element_counter
     min_heapTree.append(text)
     element_counter += 1
@@ -13,10 +14,12 @@ def return_element_count() -> int:
     return element_counter
 
 def remove_return() -> str | None:
+    # if there arent any elements
     global element_counter
     if element_counter == 0:
         return None
     
+    # get the smallest element at index 0 since 0 always holds the smallest element in the tree
     smallest = min_heapTree[0]
 
     # move last element to the front of the array (after popping)
@@ -30,18 +33,18 @@ def remove_return() -> str | None:
     return smallest
 
 def return_smallest() -> str | None:
-    # safe when heap is empty
+    # return first index unless there arent any elements
     return None if element_counter == 0 else min_heapTree[0]
 
 def restore_afterAdd(child_index: int) -> None:
-    #to make sure it doesn't go past 0
+    # to make sure it doesn't go past 0
     if child_index <= 0:
         return
 
-    #get parent index
+    # get parent index
     parent_index = parent(child_index)
     
-    #swap when child is smaller than parent
+    # swap when child is smaller than parent
     if min_heapTree[child_index] < min_heapTree[parent_index]:
         # swap
         temp = min_heapTree[parent_index]
